@@ -53,9 +53,9 @@ jobs:
       - name: Install MIT kerberos
         run: choco install -y --limit-output mitkerberos --install-arguments="ADDLOCAL=all"
         continue-on-error: true
-      
-      - name: Find Kerberos installation folder
-        run: Get-Command gss-client | Select-Object -Property Source
+
+      - name: Cat choco logs
+        run: Get-Content "C:\ProgramData\chocolatey\logs\chocolatey.log"
 
       - name: Build on windows
         run: npm i
