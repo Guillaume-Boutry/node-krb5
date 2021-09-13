@@ -51,10 +51,8 @@ jobs:
           echo github.event_name: ${{ github.event_name }}
 
       - name: Install MIT kerberos
-        run: choco install -y --limit-output mitkerberos --install-arguments="ADDLOCAL=all"
+        run: choco install -y --limit-output mitkerberos --install-arguments="TARGETDIR=D:/ ADDLOCAL=all"
         continue-on-error: true
 
       - name: Build on windows
         run: npm i
-        env:
-          GYP_DEFINES: "KRB_PATH=C:/Program Files/MIT/Kerberos"
