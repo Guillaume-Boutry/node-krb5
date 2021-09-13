@@ -54,10 +54,7 @@ jobs:
         run: choco install -y --limit-output mitkerberos --install-arguments="ADDLOCAL=all"
         continue-on-error: true
 
-      - name: Cat choco logs
-        run: Get-Content "C:\ProgramData\chocolatey\logs\chocolatey.log"
-
       - name: Build on windows
         run: npm i
         env:
-          KRB_PATH: "C:\\Program Files\\MIT\\Kerberos"
+          GYP_DEFINES: "KRB_PATH=C:/Program Files/MIT/Kerberos"
