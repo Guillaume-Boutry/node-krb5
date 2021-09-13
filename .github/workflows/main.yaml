@@ -59,3 +59,5 @@ jobs:
 
       - name: Build on windows
         run: npm i
+        env:
+          KRB_PATH: "C:\\Program Files\\MIT\\Kerberos"
