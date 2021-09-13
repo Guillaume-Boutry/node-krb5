@@ -12,7 +12,7 @@ Foreach ($node_version in @("16", "14")) {
   # --force forces reinstallation
   npm install --unsafe-perm --force
   npm test
-  err=$LASTEXITCODE
+  $err=$LASTEXITCODE
   If ($err -ne 0 ){
     Write-Host -ForegroundColor RED "Tests failed for Node.js $node_version"
     Exit $err

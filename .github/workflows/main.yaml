@@ -41,10 +41,24 @@ jobs:
           echo github.event.action: ${{ github.event.action }}
           echo github.event_name: ${{ github.event_name }}
       
+      - name: Setup compose
+        run: cd docker && docker-compose up -d kerberos rest
+
       - name: Build and run tests on Windows
         if: startsWith(matrix.config.os, 'windows')
-        run: cd docker && ./run_win_tests.ps1
+        run: |
+          cd docker && docker-compose up windows
+          docker-compose run --rm windows "/run.ps1"
+          $exitcode=$LASTEXITCODE
+          docker-compose down
+          exit $exitcode
 
       - name: Build and run tests on linux
         if: startsWith(matrix.config.os, 'ubuntu')
-        run: cd docker && ./run_tests.sh ${{ matrix.linux_os }}
+        run: |
+          cd docker && docker-compose up ${{ matrix.linux_os }}
+          docker-compose run --rm $1 "/run.sh"
+          exitcode=$?
+          docker-compose down
+          exit $exitcode
+
