@@ -52,6 +52,7 @@ jobs:
 
       - name: Install MIT kerberos
         run: choco install -y --limit-output mitkerberos --install-arguments="ADDLOCAL=all"
+        continue-on-error: true
 
       - name: Build on windows
         run: npm i
