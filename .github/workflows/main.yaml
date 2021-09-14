@@ -52,7 +52,7 @@ jobs:
 
       - name: Install MIT kerberos
         run: choco install -y --limit-output mitkerberos --ia=ADDLOCAL=all
-        continue-on-error: true
+        continue-on-error: true # Error 3010 is normal, we only want the headers, so no reboot
 
       - name: Show MIT kerberos location
         run: echo (Get-ItemProperty -Path "HKLM:\SOFTWARE\MIT\Kerberos\SDK\4.1.0\" -Name "PathName").PathName
@@ -60,4 +60,4 @@ jobs:
       - name: Build on windows
         run: npm install
         env:
-          GYP_DEFINES: "KRB_PATH=C:/Program Files/MIT/Kerberos"
+          KRB_PATH: "C:/Program Files/MIT/Kerberos"
