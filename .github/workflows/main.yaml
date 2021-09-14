@@ -55,10 +55,10 @@ jobs:
         continue-on-error: true # Error 3010 is normal, we only want the headers, so no reboot
 
       - name: Get MIT Kerberos path
-        run: Write-Host "::set-output name=KRB_PATH::$((Get-ItemProperty -Path 'HKLM:\SOFTWARE\MIT\Kerberos\SDK\4.1.0\').PathName)"
+        run: Write-Host "::set-output name=KRB_PATH::\"$((Get-ItemProperty -Path 'HKLM:\SOFTWARE\MIT\Kerberos\SDK\4.1.0\').PathName)\""
         id: mit_kerberos
 
       - name: Build on windows
         run: npm install
         env:
-          GYP_DEFINES: KRB_PATH="${{ steps.mit_kerberos.outputs.KRB_PATH }}"
+          GYP_DEFINES: KRB_PATH=${{ steps.mit_kerberos.outputs.KRB_PATH }}
