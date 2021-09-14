@@ -56,7 +56,7 @@ jobs:
 
       - name: Get MIT Kerberos path
         run: |
-          $krb_path=(Get-ItemProperty -Path 'HKLM:/SOFTWARE/MIT/Kerberos/SDK/4.1.0').PathName
+          $krb_path=(Get-ItemProperty -Path 'HKLM:/SOFTWARE/MIT/Kerberos/SDK/4.1.0').PathName.replace('\\', '/')
           Write-Host "::set-output name=KRB_PATH::$krb_path"
         id: mit_kerberos
 
@@ -65,4 +65,4 @@ jobs:
           echo "::debug::Echo the krb_path -> !${{ steps.mit_kerberos.outputs.KRB_PATH }}!$env:KRB_PATH"
           npm install
         env:
-          GYP_DEFINES: KRB_PATH="${{ steps.mit_kerberos.outputs.KRB_PATH }}"
+          GYP_DEFINES: KRB_PATH='${{ steps.mit_kerberos.outputs.KRB_PATH }}'
