@@ -59,3 +59,5 @@ jobs:
       
       - name: Build on windows
         run: npm install
+        env:
+          GYP_DEFINES: "KRB_PATH=C:/Program Files/MIT/Kerberos"
