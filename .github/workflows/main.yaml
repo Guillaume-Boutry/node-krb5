@@ -61,8 +61,6 @@ jobs:
         id: mit_kerberos
 
       - name: Build on windows
-        run: |
-          echo "::debug::Echo the krb_path -> !${{ steps.mit_kerberos.outputs.KRB_PATH }}!$env:KRB_PATH"
-          npm install
+        run: npm install
         env:
           GYP_DEFINES: KRB_PATH='${{ steps.mit_kerberos.outputs.KRB_PATH }}'
