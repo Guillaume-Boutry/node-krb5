@@ -51,8 +51,8 @@ jobs:
           echo github.event_name: ${{ github.event_name }}
 
       - name: Install MIT kerberos
-        run: choco install -y --limit-output mitkerberos --install-arguments="TARGETDIR=D:/ ADDLOCAL=all"
+        run: choco install -y --limit-output mitkerberos
         continue-on-error: true
 
       - name: Build on windows
-        run: npm i
+        run: npm install
