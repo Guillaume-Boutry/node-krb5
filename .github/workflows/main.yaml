@@ -51,11 +51,11 @@ jobs:
           echo github.event_name: ${{ github.event_name }}
 
       - name: Install MIT kerberos
-        run: choco install -y --limit-output mitkerberos ADDLOCAL=all && Get-ItemProperty -Path "HKLM:\SOFTWARE\MIT\Kerberos\SDK\4.1.0\" -Name "PathName" | Select-Object -Property "PathName"
+        run: choco install -y --limit-output mitkerberos --ia=ADDLOCAL=all
         continue-on-error: true
 
       - name: Show MIT kerberos location
-        run: Get-ItemProperty -Path "HKLM:\SOFTWARE\MIT\Kerberos\SDK\4.1.0\" -Name "PathName" | Select-Object -Property "PathName"
+        run: echo (Get-ItemProperty -Path "HKLM:\SOFTWARE\MIT\Kerberos\SDK\4.1.0\" -Name "PathName").PathName
       
       - name: Build on windows
         run: npm install
