@@ -56,7 +56,7 @@ jobs:
 
       - name: Get MIT Kerberos path
         run: |
-          $krb_path=(Get-ItemProperty -Path 'HKLM:/SOFTWARE/MIT/Kerberos/SDK/4.1.0').PathName.replace('\\', '/')
+          $krb_path=(Get-ItemProperty -Path 'HKLM:/SOFTWARE/MIT/Kerberos/SDK/4.1.0').PathName.replace('\', '/')
           Write-Host "::set-output name=KRB_PATH::$krb_path"
         id: mit_kerberos
 
