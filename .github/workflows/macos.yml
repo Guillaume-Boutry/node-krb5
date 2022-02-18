@@ -31,9 +31,13 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Compile
         run: npm install
+        env:
+          LDFLAGS: "-L/opt/homebrew/opt/krb5/lib"
+          CPPFLAGS: "-I/opt/homebrew/opt/krb5/include"
         
       - name: Start KDC
-        run: /usr/sbin/krb5kdc -P /var/run/krb5kdc/krb5kdc.pid
+        run: /opt/homebrew/opt/krb5/sbin/krb5kdc -P /var/run/krb5kdc/krb5kdc.pid
+          
       
       - name: kinit
-        run: kinit test
+        run: /opt/homebrew/opt/krb5/bin/kinit test
